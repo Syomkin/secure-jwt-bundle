@@ -11,20 +11,20 @@ use ConnectHolland\SecureJWTBundle\DTO\GeneratedCodes;
 use ConnectHolland\SecureJWTBundle\Entity\RecoveryCode as RecoveryCodeEntity;
 use ConnectHolland\SecureJWTBundle\Entity\TwoFactorUserInterface;
 use ConnectHolland\SecureJWTBundle\Message\RecoveryCode;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class RecoveryCodeHandler implements MessageHandlerInterface
 {
-    private ManagerRegistry $doctrine;
+    private Registry $doctrine;
 
     private TokenStorageInterface $tokenStorage;
 
     /**
      * RecoveryCodeHandler constructor.
      */
-    public function __construct(ManagerRegistry $doctrine, TokenStorageInterface $tokenStorage)
+    public function __construct(Registry $doctrine, TokenStorageInterface $tokenStorage)
     {
         $this->doctrine     = $doctrine;
         $this->tokenStorage = $tokenStorage;

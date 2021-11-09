@@ -9,7 +9,7 @@ namespace ConnectHolland\SecureJWTBundle\EventSubscriber;
 
 use ConnectHolland\SecureJWTBundle\Entity\TwoFactorUserInterface;
 use ConnectHolland\SecureJWTBundle\Event\SetupTwoFactorAuthenticationEvent;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Endroid\QrCode\Factory\QrCodeFactoryInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
@@ -20,14 +20,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LoginSubscriber implements EventSubscriberInterface
 {
-    private ManagerRegistry $doctrine;
+    private Registry $doctrine;
 
     private QrCodeFactoryInterface $qrCodeFactory;
 
     private GoogleAuthenticator $googleAuthenticator;
 
     public function __construct(
-        ManagerRegistry $doctrine,
+        Registry $doctrine,
         QrCodeFactoryInterface $qrCodeFactory,
         ?GoogleAuthenticator $googleAuthenticator = null
     ) {

@@ -10,7 +10,7 @@ namespace ConnectHolland\SecureJWTBundle\Security\Http\Authentication;
 use ConnectHolland\SecureJWTBundle\Entity\InvalidToken;
 use ConnectHolland\SecureJWTBundle\Entity\RememberDeviceToken;
 use ConnectHolland\SecureJWTBundle\Resolver\RememberDeviceResolver;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,9 +34,9 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
 
     private string $sameSite;
 
-    private ManagerRegistry $doctrine;
+    private Registry $doctrine;
 
-    public function __construct(AuthenticationSuccessHandlerInterface $successHandler, JWTEncoderInterface $jwtEncoder, string $sameSite, RememberDeviceResolver $rememberDeviceResolver, ManagerRegistry $doctrine)
+    public function __construct(AuthenticationSuccessHandlerInterface $successHandler, JWTEncoderInterface $jwtEncoder, string $sameSite, RememberDeviceResolver $rememberDeviceResolver, Registry $doctrine)
     {
         $this->rememberDeviceResolver = $rememberDeviceResolver;
         $this->successHandler         = $successHandler;

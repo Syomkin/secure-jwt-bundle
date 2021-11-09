@@ -9,7 +9,7 @@ namespace ConnectHolland\SecureJWTBundle\Handler;
 
 use ConnectHolland\SecureJWTBundle\Entity\InvalidToken;
 use ConnectHolland\SecureJWTBundle\Message\Logout;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +20,9 @@ class LogoutHandler implements MessageHandlerInterface
 {
     private TokenStorageInterface $tokenStorage;
 
-    private ManagerRegistry $doctrine;
+    private Registry $doctrine;
 
-    public function __construct(TokenStorageInterface $tokenStorage, ManagerRegistry $doctrine)
+    public function __construct(TokenStorageInterface $tokenStorage, Registry $doctrine)
     {
         $this->tokenStorage = $tokenStorage;
         $this->doctrine     = $doctrine;

@@ -10,17 +10,17 @@ namespace ConnectHolland\SecureJWTBundle\Handler;
 use ConnectHolland\SecureJWTBundle\Entity\RecoveryCode;
 use ConnectHolland\SecureJWTBundle\Exception\TwoFactorSecretNotSetupException;
 use ConnectHolland\SecureJWTBundle\Message\RecoverSecret;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class RecoverSecretHandler implements MessageHandlerInterface
 {
-    private ManagerRegistry $doctrine;
+    private Registry $doctrine;
 
     /**
      * RecoverSecretHandler constructor.
      */
-    public function __construct(ManagerRegistry $doctrine)
+    public function __construct(Registry $doctrine)
     {
         $this->doctrine = $doctrine;
     }
