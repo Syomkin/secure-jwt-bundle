@@ -26,10 +26,13 @@ class LoginSubscriber implements EventSubscriberInterface
 
     private GoogleAuthenticator $googleAuthenticator;
 
-    public function __construct(ManagerRegistry $doctrine, QrCodeFactoryInterface $qrCodeFactory, GoogleAuthenticator $googleAuthenticator)
-    {
-        $this->doctrine            = $doctrine;
-        $this->qrCodeFactory       = $qrCodeFactory;
+    public function __construct(
+        ManagerRegistry $doctrine,
+        QrCodeFactoryInterface $qrCodeFactory,
+        ?GoogleAuthenticator $googleAuthenticator = null
+    ) {
+        $this->doctrine = $doctrine;
+        $this->qrCodeFactory = $qrCodeFactory;
         $this->googleAuthenticator = $googleAuthenticator;
     }
 
@@ -40,7 +43,7 @@ class LoginSubscriber implements EventSubscriberInterface
     {
         return [
             SetupTwoFactorAuthenticationEvent::NAME => 'provideQRCode',
-            Events::AUTHENTICATION_SUCCESS          => 'confirm2Fa',
+            Events::AUTHENTICATION_SUCCESS => 'confirm2Fa',
         ];
     }
 
@@ -59,14 +62,14 @@ class LoginSubscriber implements EventSubscriberInterface
         $this->setGoogleAuthenticatorSecret($event->getUser());
 
         $qrContent = $this->googleAuthenticator->getQRContent($event->getUser());
-        $qrCode    = $this->qrCodeFactory->create($qrContent, ['size' => 150]);
+        $qrCode = $this->qrCodeFactory->create($qrContent, ['size' => 150]);
 
         $event->setResponse(
             new JsonResponse(
                 [
-                    'result'  => 'ok',
+                    'result' => 'ok',
                     'message' => 'use provided QR code to set up two factor authentication',
-                    'qr'      => $qrCode->writeDataUri(),
+                    'qr' => $qrCode->writeDataUri(),
                 ],
                 Response::HTTP_OK
             )
