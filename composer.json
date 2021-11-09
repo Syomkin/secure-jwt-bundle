@@ -1,10 +1,10 @@
 {
-    "name": "connectholland/secure-jwt-bundle",
+    "name": "syomkin/secure-jwt-bundle",
     "type": "library",
     "description": "Bundle to increase security of JWT based security",
     "license": "proprietary",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4||^8.0",
         "lexik/jwt-authentication-bundle": "^2.6",
         "ext-json": "*",
         "doctrine/orm": "^2.7",
